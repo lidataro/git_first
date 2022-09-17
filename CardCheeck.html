@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <div class="card card1">
+        
+    </div>
+    <div class="card card2">
+
+    </div>
+    <div class="card card3">
+
+    </div>
+    <div class="card card4">
+
+    </div>
+    <div class="card  card5">
+
+    </div>
+    <div class="card card6">
+
+    </div>
+</div>
+</body>
+<script>
+const images = ['../images/morioka.jpg','../images/kouyou.jpg','../images/senko.jpg',
+'../images/morioka.jpg','../images/kouyou.jpg','../images/senko.jpg'];
+// const img = document.createElement('img');
+const cards = Array.from(document.querySelectorAll('.card'));
+function randomImage(){
+    return Math.floor(Math.random()*images.length);
+}
+
+function Comparerandom(){
+    return Math.floor(Math.random()*images.length);
+}
+
+ for(const card of cards){
+     let compaarerand = Comparerandom();
+    card.addEventListener('click',function(){
+       let rand = randomImage();
+       const img = document.createElement('img');
+       
+       card.appendChild(img);
+       let num1 = rand%3;
+       let num2 = compaarerand%3;
+       console.log(num1, num2);
+       if(num1 == num2){
+        img.src=images[rand];
+       }else{
+         img.style.display='none';
+       }
+
+       
+    })
+ }
+
+// cards.forEach((card)=>{
+//  card.addEventListener('click',function(){
+//     let rand= randomImage();
+//     const img = document.createElement('img');
+   
+
+
+//     })
+// })
+
+</script>
+<style>
+body{
+    height: 100vh;
+    max-width: 800px;
+}
+.card{
+    width: 200px;
+    height: 200px;
+    background: green;
+    margin: 20px;
+    cursor: pointer;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+img{
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+</style>
+</html>
