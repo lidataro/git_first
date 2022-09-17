@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="input-menu">
+        <h1>Note Taker</h1>
+        <span>Add A New Note:</span>
+        <div>
+                  <label for="note">Note:</label>
+
+                  <textarea name="" id="note" cols="100" rows="2"placeholder="write here" min-width="300px" max-width="800px"></textarea >
+              </div>
+
+ 
+
+            <button class="addNote">Add Note</button>
+        </div>
+    </div>
+    
+    <script>
+//    
+    let clickcnt=0;
+    const addNote = document.querySelector('.addNote');
+    const firstdiv = document.querySelector('.input-menu');
+    const textarea = document.querySelector('textarea');
+    function ShowNote(){
+        clickcnt++;
+        const node = document.createElement('h2');
+        node.textContent=`Node${clickcnt}`;
+        const viewbutton = document.createElement('button');
+        // textbox
+        const textbox = document.createElement('div');
+        // textboxにスタイル
+        textbox.style.width='100px';
+        textbox.style.margin='30px';
+        textbox.style.display='inline-block';
+        textbox.style.border='1px solid';
+        textbox.style.padding='32px';
+        // textbox内のbuttonにスタイル
+        viewbutton.textContent="View";
+        viewbutton.style.backgroundColor='blue';
+        viewbutton.style.color='white';
+        viewbutton.style.borderRadius='20px';
+        viewbutton.style.width='100px';
+        viewbutton.style.display='block';
+        viewbutton.style.marginTop='12px';
+        viewbutton.style.cursor='pointer';
+        
+        textbox.innerText=textarea.value;
+        
+        // ボタン押したら入力値を更新
+        textarea.value='write here';
+        // textboxを配置
+        firstdiv.insertAdjacentElement('afterend',textbox);
+        // textbox内に文字とbuttonを挿入
+        textbox.insertAdjacentElement('afterbegin',node);
+        textbox.appendChild(viewbutton);
+        
+        function modalDisplay(){
+            let sampletext='Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit soluta minus id, quae, quisquam possimus ducimus odit, est pariatur accusantium veritatis atque necessitatibus non distinctio voluptates nemo quidem aliquam maxime?';
+
+
+
+            const divEl = document.createElement('div');
+            document.body.appendChild(divEl);
+            divEl.classList.add('modal');
+            const innerdivEL = document.createElement('div');
+            innerdivEL.classList.add('inner');
+
+            innerdivEL.textContent=sampletext;
+            divEl.appendChild(innerdivEL);
+            viewbutton.style.pointerEvents='none';
+            document.body.classList.add('shadow');
+            
+
+            const closeButton = document.createElement('button');
+            closeButton.textContent='Close';
+            closeButton.classList.add('close-btn')
+            innerdivEL.appendChild(closeButton);
+
+            closeButton.addEventListener('click',function(){
+                innerdivEL.style.display='none';
+                divEl.style.display='none';
+                innerdivEL.classList.remove('inner');
+                divEl.classList.remove('modal');
+                viewbutton.style.pointerEvents='auto';
+                document.body.classList.remove('shadow');
+                sampletext='';
+                closeButton.style.display='none';
+            })
+        }
+
+        // text内buttonnoのよびだし
+        viewbutton.addEventListener('click',modalDisplay);
+
+    }
+
+    addNote.addEventListener('click',ShowNote);
+
+
+    </script>
+</body>
+<style>
+ 
+.input-menu{
+    text-align: center;
+}
+.input-menu h1{
+    font-weight: lighter;
+}
+.input-menu span{
+    font-size: 24px;
+    color:green;
+}
+.input-menu textarea{
+
+    margin-bottom: 12px;
+    
+}
+.input-menu button{
+    width: 80px;
+    height: 30px;
+    color: #ffff;
+    background-color:green;
+    border-radius: 4px;
+}
+.modal{
+    position: absolute;
+    top:20%;
+    left:20%;
+    width: 100%;
+    height: 100%;
+}
+.inner{
+    text-align: center;
+    width: 80%;
+    height: 40%;
+    background-color:rgba(255,255,255,0.8);
+
+}
+.close-btn{
+    display: block;
+    margin-top: 200px;
+}
+.shadow{
+    background-color:rgba(24, 6, 6, 0.7);
+}
+</style>
+</html>
